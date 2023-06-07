@@ -15,7 +15,20 @@ const getJobParamSchema = Joi.object({
   id: Joi.string().guid().required(),
 });
 
+const deleteJobParamSchema = Joi.object({
+  id: Joi.string().guid().required(),
+});
+
+const patchJobRequestSchema = Joi.object({
+  contactEmail: Joi.string().optional().email(),
+  status: Joi.string()
+    .required()
+    .valid(...["AVAILABLE", "ASSIGNED", "COMPLETED"]),
+}).options({ stripUnknown: true });
+
 module.exports = {
   createNewJobRequestSchema,
   getJobParamSchema,
+  deleteJobParamSchema,
+  patchJobRequestSchema,
 };

@@ -8,6 +8,8 @@ const {
 const {
   createNewJobRequestSchema,
   getJobParamSchema,
+  patchJobRequestSchema,
+  deleteJobParamSchema,
 } = require("./validation/jobs.schema");
 
 module.exports = [
@@ -52,10 +54,32 @@ module.exports = [
     method: "PATCH",
     path: "/jobs/{id}",
     handler: patchJobById,
+    config: {
+      validate: {
+        options: {
+          abortEarly: false,
+        },
+        payload: patchJobRequestSchema,
+        failAction: (_request, _h, err) => {
+          throw err;
+        },
+      },
+    },
   },
   {
     method: "DELETE",
     path: "/jobs/{id}",
     handler: deleteJobById,
+    config: {
+      validate: {
+        options: {
+          abortEarly: false,
+        },
+        params: deleteJobParamSchema,
+        failAction: (_request, _h, err) => {
+          throw err;
+        },
+      },
+    },
   },
 ];

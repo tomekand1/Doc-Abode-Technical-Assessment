@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ext js, hbs index.js",
-    "test:unit": "jest --watchAll"
+    "start": "node --ext js, hbs index.js",
+    "test:unit:watch": "jest --watchAll",
+    "test:unit": "jest --forceExit --maxWorkers=50%",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "jest": "^29.5.0",
-    "mongodb-memory-server": "^8.12.2"
+    "mongodb-memory-server": "^8.12.2",
+    "husky": "^8.0.0"
   }
 }
