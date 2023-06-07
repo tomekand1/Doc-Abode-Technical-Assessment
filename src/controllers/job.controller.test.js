@@ -3,6 +3,7 @@ const {
   postJob,
   getJobById,
   deleteJobById,
+  patchJobById,
 } = require("./job.controller");
 const JobModel = require("../models/model");
 jest.mock("../models/model");
@@ -179,5 +180,46 @@ describe("deleteJobById", () => {
     );
 
     expect(res.code).toEqual(204);
+  });
+});
+
+describe("patchJobById", () => {
+  beforeEach(() => {
+    JobModel.updateOne = jest.fn().mockImplementationOnce(({ id }, payload) => {
+      const validateRequestPayload = (obj) => {
+        return Object.keys(obj).length > 1;
+      };
+      if (
+        id === "80d411f5-bfe5-4213-a819-858a9b17c971" &&
+        validateRequestPayload(payload)
+      ) {
+        return { matchedCount: 1 };
+      } else {
+        return { matchedCount: 0 };
+      }
+    });
+  });
+  it("should update an item in database", async () => {
+    const mockH = {
+      response: jest.fn().mockImplementationOnce((val) => {
+        if (val) {
+          return {
+            code: jest.fn().mockResolvedValue(),
+          };
+        }
+      }),
+    };
+
+    const res = await patchJobById(
+      {
+        params: { id: "80d411f5-bfe5-4213-a819-858a9b17c971" },
+        payload: { status: "COMPLETED" },
+      },
+      mockH
+    );
+
+    expect(res).toEqual(
+      "Item id: 80d411f5-bfe5-4213-a819-858a9b17c971 has been successfully updated"
+    );
   });
 });

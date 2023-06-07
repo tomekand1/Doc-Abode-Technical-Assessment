@@ -31,9 +31,16 @@ const deleteJobById = async (request, h) => {
   }
 };
 
+const patchJobById = async (request, h) => {
+  const { id } = request.params;
+  const payload = request.payload;
+  return { id, payload };
+};
+
 module.exports = {
   getJobs,
   postJob,
   getJobById,
   deleteJobById,
+  patchJobById,
 };
