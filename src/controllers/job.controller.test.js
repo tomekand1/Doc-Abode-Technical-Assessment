@@ -222,4 +222,30 @@ describe("patchJobById", () => {
       "Item id: 80d411f5-bfe5-4213-a819-858a9b17c971 has been successfully updated"
     );
   });
+
+  it("should return 204 status code if item not found for patch operation", async () => {
+    const mockH = {
+      response: jest.fn().mockImplementationOnce((val) => {
+        if (!val) {
+          return {
+            code: jest.fn(val).mockResolvedValue({ code: 204 }),
+          };
+        }
+      }),
+    };
+
+    const id = "80d411f5-bfe5-4213-a819-858a9b17c972";
+    const res = await patchJobById(
+      {
+        params: { id: id },
+        payload: {
+          contactEmail: "tomekand1@gmail.com",
+          status: "COMPLETED",
+        },
+      },
+      mockH
+    );
+
+    expect(res.code).toEqual(204);
+  });
 });
