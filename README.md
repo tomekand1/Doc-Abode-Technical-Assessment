@@ -26,6 +26,8 @@ The project employs the MVC (Model-View-Controller) software design pattern. Giv
 
 ### `Testing`
 
+`Jest`
+
 <p style="color:grey">
 npm run test:unit:watch OR
 npm run test:unit</p>
@@ -59,8 +61,6 @@ Returns list of available jobs
 
 **Endpoint**: `/jobs - POST`
 
-Saves new job to DB
-
 ```javascript
 // RequestBody
 {
@@ -83,7 +83,6 @@ Saves new job to DB
 
 ### Get Job by ID
 
-Gets Job by given ID
 **Endpoint**: `/jobs/{id} - GET`
 
 ```javascript
@@ -122,8 +121,6 @@ ok(
 ### Delete Job by ID
 
 **Endpoint**: `/jobs/{id} - DELETE`
-
-Deletes job by given id
 
 ```javascript
 //Response
