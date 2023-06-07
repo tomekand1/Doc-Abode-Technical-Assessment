@@ -1,6 +1,6 @@
 const { getJobs } = require("./job.controller");
-const JobModel = require("../model/model");
-jest.mock("../model/model");
+const JobModel = require("../models/model");
+jest.mock("../models/model");
 
 const mockedJob = {
   contactEmail: "tomekand1@gmail.com",

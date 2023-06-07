@@ -1,4 +1,4 @@
-const JobModel = require("../model/model");
+const JobModel = require("../models/model");
 
 const getJobs = async () => {
   return await JobModel.find().sort({ createdAt: -1 });
