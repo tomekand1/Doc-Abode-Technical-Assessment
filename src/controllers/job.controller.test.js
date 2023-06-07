@@ -87,4 +87,11 @@ describe("postJob", () => {
     expect(res.data).toEqual(mockedJob);
     expect(res.statusCode).toEqual(201);
   });
+  it("should throw panic error when db throws", async () => {
+    jest
+      .spyOn(JobModel.prototype, "save")
+      .mockImplementationOnce(() => Promise.reject(dbError));
+
+    await await expect(postJob()).rejects.toThrow();
+  });
 });
