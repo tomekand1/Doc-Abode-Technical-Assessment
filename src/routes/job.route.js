@@ -1,4 +1,8 @@
-const { getJobs, postJob } = require("../controllers/job.controller");
+const {
+  getJobs,
+  postJob,
+  getJobById,
+} = require("../controllers/job.controller");
 
 module.exports = [
   {
@@ -10,5 +14,10 @@ module.exports = [
     method: "POST",
     path: "/jobs",
     handler: postJob,
+  },
+  {
+    method: "GET",
+    path: "/jobs/{id}",
+    handler: getJobById,
   },
 ];
