@@ -23,7 +23,10 @@ const getJobById = async (request) => {
 
 const deleteJobById = async (request) => {
   const { id } = request.params;
-  return id;
+  const res = await JobModel.deleteOne({ id });
+  if (res.deletedCount > 0) {
+    return `Item id: ${id} has been successfully deleted`;
+  }
 };
 
 module.exports = {
