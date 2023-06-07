@@ -21,7 +21,7 @@ const httpResp = (data, statusCode = 200) => {
 
 describe("getJobs", () => {
   it("should fetch items from database", async () => {
-    Job.find = jest.fn().mockImplementationOnce(() => ({
+    JobModel.find = jest.fn().mockImplementationOnce(() => ({
       sort: jest.fn().mockResolvedValue(httpResp(mockedJob)),
     }));
 

@@ -1,5 +1,7 @@
+const JobModel = require("../model/model");
+
 const getJobs = async () => {
-  return Promise.resolve();
+  return await JobModel.find().sort({ createdAt: -1 });
 };
 
 module.exports = {
