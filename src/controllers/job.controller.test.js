@@ -22,14 +22,22 @@ const httpResp = (data, statusCode = 200) => {
 describe("getJobs", () => {
   it("should fetch items from database", async () => {
     JobModel.find = jest.fn().mockImplementationOnce(() => ({
-      sort: jest.fn().mockResolvedValue(httpResp(mockedJob)),
+      sort: jest.fn().mockResolvedValue(httpResp([mockedJob])),
     }));
 
     const res = await getJobs();
 
     expect(res).toEqual({
       statusCode: 200,
-      data: mockedJob,
+      data: [mockedJob],
     });
+  });
+  // this is a default behavior
+  it("should throw panic error when db throws", async () => {
+    JobModel.find = jest.fn().mockImplementationOnce(() => ({
+      sort: jest.fn().mockRejectedValue(dbError),
+    }));
+
+    await await expect(getJobs()).rejects.toThrow();
   });
 });
