@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --ext js, hbs index.js",
+    "start": "node index.js",
     "test:unit:watch": "jest --watchAll",
     "test:unit": "jest --forceExit --maxWorkers=50%",
     "prepare": "husky install"
