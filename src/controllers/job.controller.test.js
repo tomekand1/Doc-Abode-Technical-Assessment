@@ -106,11 +106,20 @@ describe("getJobById", () => {
       }
     });
   });
-  it("should fetch item from database", async () => {
+  it("should fetch item from database by id", async () => {
     const res = await getJobById({
       params: { id: "80d411f5-bfe5-4213-a819-858a9b17c971" },
     });
 
     expect(res).toEqual(mockedJob);
+  });
+
+  it("should an error when no data found ", async () => {
+    const id = "80d411f5-bfe5-4213-a819-858a9b17c972";
+    await expect(
+      getJobById({
+        params: { id },
+      })
+    ).rejects.toThrow(new Error(`No item found for id: ${id}`));
   });
 });
