@@ -10,7 +10,13 @@ const postJob = async (request, h) => {
   return h.response(response).code(201);
 };
 
+const getJobById = async (request) => {
+  const { id } = request.params;
+  return id;
+};
+
 module.exports = {
   getJobs,
   postJob,
+  getJobById,
 };

@@ -1,4 +1,4 @@
-const { getJobs, postJob } = require("./job.controller");
+const { getJobs, postJob, getJobById } = require("./job.controller");
 const JobModel = require("../models/model");
 jest.mock("../models/model");
 
@@ -93,5 +93,24 @@ describe("postJob", () => {
       .mockImplementationOnce(() => Promise.reject(dbError));
 
     await await expect(postJob()).rejects.toThrow();
+  });
+});
+
+describe("getJobById", () => {
+  beforeEach(() => {
+    JobModel.find = jest.fn().mockImplementationOnce(({ id }) => {
+      if (id === mockedJob.id) {
+        return [mockedJob];
+      } else {
+        return [];
+      }
+    });
+  });
+  it("should fetch item from database", async () => {
+    const res = await getJobById({
+      params: { id: "80d411f5-bfe5-4213-a819-858a9b17c971" },
+    });
+
+    expect(res).toEqual(mockedJob);
   });
 });
