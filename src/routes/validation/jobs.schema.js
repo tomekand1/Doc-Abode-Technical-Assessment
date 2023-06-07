@@ -11,6 +11,11 @@ const createNewJobRequestSchema = Joi.object({
     .valid(...["AVAILABLE", "ASSIGNED", "COMPLETED"]),
 }).options({ stripUnknown: true });
 
+const getJobParamSchema = Joi.object({
+  id: Joi.string().guid().required(),
+});
+
 module.exports = {
   createNewJobRequestSchema,
+  getJobParamSchema,
 };
