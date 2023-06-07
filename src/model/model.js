@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
+const sanitizeOutput = (_doc, obj) => {
+  return omit(obj, ["__v", "_id"]);
+};
 const options = {
   toJSON: {
     transform: sanitizeOutput,
   },
 };
+const Schema = mongoose.Schema;
+
 let model = new Schema(
   {
     id: {
