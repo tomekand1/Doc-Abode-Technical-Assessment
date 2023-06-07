@@ -40,4 +40,16 @@ describe("getJobs", () => {
 
     await await expect(getJobs()).rejects.toThrow();
   });
+  it("should return an empty array when items not found and status code 200", async () => {
+    JobModel.find = jest.fn().mockImplementationOnce(() => ({
+      sort: jest.fn().mockResolvedValue(httpResp([])),
+    }));
+
+    const res = await getJobs();
+
+    expect(res).toEqual({
+      statusCode: 200,
+      data: [],
+    });
+  });
 });
