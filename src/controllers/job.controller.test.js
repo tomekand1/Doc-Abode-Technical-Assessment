@@ -160,4 +160,24 @@ describe("deleteJobById", () => {
       "Item id: 80d411f5-bfe5-4213-a819-858a9b17c971 has been successfully deleted"
     );
   });
+  it("should return 204 status code if item not found for delete", async () => {
+    const mockH = {
+      response: jest.fn().mockImplementationOnce((val) => {
+        if (!val) {
+          return {
+            code: jest.fn(val).mockResolvedValue({ code: 204 }),
+          };
+        }
+      }),
+    };
+    const id = "80d411f5-bfe5-4213-a819-858a9b17c972";
+    const res = await deleteJobById(
+      {
+        params: { id: id },
+      },
+      mockH
+    );
+
+    expect(res.code).toEqual(204);
+  });
 });
