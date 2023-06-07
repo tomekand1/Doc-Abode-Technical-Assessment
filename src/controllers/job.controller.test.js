@@ -1,4 +1,9 @@
-const { getJobs, postJob, getJobById } = require("./job.controller");
+const {
+  getJobs,
+  postJob,
+  getJobById,
+  deleteJobById,
+} = require("./job.controller");
 const JobModel = require("../models/model");
 jest.mock("../models/model");
 
@@ -121,5 +126,38 @@ describe("getJobById", () => {
         params: { id },
       })
     ).rejects.toThrow(new Error(`No item found for id: ${id}`));
+  });
+});
+
+describe("deleteJobById", () => {
+  beforeEach(() => {
+    JobModel.deleteOne = jest.fn().mockImplementationOnce(({ id }) => {
+      if (id === "80d411f5-bfe5-4213-a819-858a9b17c971") {
+        return { deletedCount: 1 };
+      } else {
+        return { deletedCount: 0 };
+      }
+    });
+  });
+  it("should delete item from database", async () => {
+    const mockH = {
+      response: jest.fn().mockImplementationOnce((val) => {
+        if (val) {
+          return {
+            code: jest.fn(val).mockResolvedValue({ data: val, code: 204 }),
+          };
+        }
+      }),
+    };
+    const res = await deleteJobById(
+      {
+        params: { id: "80d411f5-bfe5-4213-a819-858a9b17c971" },
+      },
+      mockH
+    );
+
+    expect(res).toEqual(
+      "Item id: 80d411f5-bfe5-4213-a819-858a9b17c971 has been successfully deleted"
+    );
   });
 });

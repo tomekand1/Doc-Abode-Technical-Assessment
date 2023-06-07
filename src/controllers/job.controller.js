@@ -21,8 +21,14 @@ const getJobById = async (request) => {
   }
 };
 
+const deleteJobById = async (request) => {
+  const { id } = request.params;
+  return id;
+};
+
 module.exports = {
   getJobs,
   postJob,
   getJobById,
+  deleteJobById,
 };
