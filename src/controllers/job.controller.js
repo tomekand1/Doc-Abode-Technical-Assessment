@@ -12,7 +12,8 @@ const postJob = async (request, h) => {
 
 const getJobById = async (request) => {
   const { id } = request.params;
-  return id;
+  const [res] = await JobModel.find({ id });
+  return res;
 };
 
 module.exports = {
