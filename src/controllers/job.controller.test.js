@@ -1,4 +1,4 @@
-const { getJobs } = require("./job.controller");
+const { getJobs, postJob } = require("./job.controller");
 const JobModel = require("../models/model");
 jest.mock("../models/model");
 
@@ -51,5 +51,40 @@ describe("getJobs", () => {
       statusCode: 200,
       data: [],
     });
+  });
+});
+
+describe("postJob", () => {
+  it("should successfully save item in to Database", async () => {
+    jest
+      .spyOn(JobModel.prototype, "save")
+      .mockImplementationOnce(() => Promise.resolve(mockedJob));
+
+    const mockH = {
+      response: jest.fn().mockImplementationOnce((newJob) => {
+        if (newJob) {
+          return {
+            code: jest.fn().mockResolvedValue(httpResp(mockedJob, 201)),
+          };
+        }
+      }),
+    };
+
+    const res = await postJob(
+      {
+        payload: {
+          contactEmail: "tomekand1@gmail.com",
+          id: "80d411f5-bfe5-4213-a819-858a9b17c971",
+          priceInPence: 9900,
+          status: "COMPLETED",
+          type: "SHIFT",
+          updatedAt: null,
+        },
+      },
+      mockH
+    );
+
+    expect(res.data).toEqual(mockedJob);
+    expect(res.statusCode).toEqual(201);
   });
 });
