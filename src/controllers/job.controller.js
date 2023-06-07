@@ -7,12 +7,14 @@ const getJobs = async () => {
 
 const postJob = async (request, h) => {
   const newJob = new JobModel(request.payload);
+
   const response = await newJob.save();
   return h.response(response).code(201);
 };
 
 const getJobById = async (request) => {
   const { id } = request.params;
+
   const [res] = await JobModel.find({ id });
   if (res) {
     return res;
@@ -24,6 +26,7 @@ const getJobById = async (request) => {
 const deleteJobById = async (request, h) => {
   const { id } = request.params;
   const res = await JobModel.deleteOne({ id });
+
   if (res.deletedCount > 0) {
     return `Item id: ${id} has been successfully deleted`;
   } else {
@@ -34,7 +37,16 @@ const deleteJobById = async (request, h) => {
 const patchJobById = async (request, h) => {
   const { id } = request.params;
   const payload = request.payload;
-  return { id, payload };
+
+  const patchPayload = {
+    ...payload,
+    updatedAt: new Date().toISOString(),
+  };
+
+  const res = await JobModel.updateOne({ id }, patchPayload);
+  if (res.matchedCount) {
+    return `Item id: ${id} has been successfully updated`;
+  }
 };
 
 module.exports = {
