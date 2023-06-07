@@ -1,3 +1,4 @@
+const Boom = require("@hapi/boom");
 const JobModel = require("../models/model");
 
 const getJobs = async () => {
@@ -13,7 +14,11 @@ const postJob = async (request, h) => {
 const getJobById = async (request) => {
   const { id } = request.params;
   const [res] = await JobModel.find({ id });
-  return res;
+  if (res) {
+    return res;
+  } else {
+    throw Boom.notFound(`No item found for id: ${id}`);
+  }
 };
 
 module.exports = {
