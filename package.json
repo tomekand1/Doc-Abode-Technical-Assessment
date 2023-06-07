@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --ext js, hbs index.js",
     "test:unit": "jest --watchAll"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.3.2",
+    "joi": "^17.9.2",
     "lodash": "^4.17.21",
     "mongoose": "^7.2.2"
   },

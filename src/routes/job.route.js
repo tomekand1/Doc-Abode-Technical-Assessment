@@ -5,6 +5,7 @@ const {
   patchJobById,
   deleteJobById,
 } = require("../controllers/job.controller");
+const { createNewJobRequestSchema } = require("./validation/jobs.schema");
 
 module.exports = [
   {
@@ -16,6 +17,17 @@ module.exports = [
     method: "POST",
     path: "/jobs",
     handler: postJob,
+    config: {
+      validate: {
+        options: {
+          abortEarly: false,
+        },
+        payload: createNewJobRequestSchema,
+        failAction: (_request, _h, err) => {
+          throw err;
+        },
+      },
+    },
   },
   {
     method: "GET",
