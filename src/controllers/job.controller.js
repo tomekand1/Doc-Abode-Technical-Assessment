@@ -44,7 +44,9 @@ const patchJobById = async (request, h) => {
   };
 
   const res = await JobModel.updateOne({ id }, patchPayload);
-  if (res.matchedCount) {
+  if (!res.matchedCount) {
+    return h.response().code(204);
+  } else {
     return `Item id: ${id} has been successfully updated`;
   }
 };
