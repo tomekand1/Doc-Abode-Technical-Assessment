@@ -5,7 +5,9 @@ const getJobs = async () => {
 };
 
 const postJob = async (request, h) => {
-  return "";
+  const newJob = new JobModel(request.payload);
+  const response = await newJob.save();
+  return h.response(response).code(201);
 };
 
 module.exports = {
