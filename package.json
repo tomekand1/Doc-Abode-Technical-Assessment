@@ -1,0 +1,28 @@
+{
+  "name": "doc-abode-technical-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomekand1/Doc-Abode-Technical-Assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomekand1/Doc-Abode-Technical-Assessment/issues"
+  },
+  "homepage": "https://github.com/tomekand1/Doc-Abode-Technical-Assessment#readme",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/hapi": "^21.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "mongodb-memory-server": "^8.12.2"
+  }
+}
