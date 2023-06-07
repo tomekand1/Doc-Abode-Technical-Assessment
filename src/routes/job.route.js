@@ -2,6 +2,8 @@ const {
   getJobs,
   postJob,
   getJobById,
+  patchJobById,
+  deleteJobById,
 } = require("../controllers/job.controller");
 
 module.exports = [
@@ -19,5 +21,15 @@ module.exports = [
     method: "GET",
     path: "/jobs/{id}",
     handler: getJobById,
+  },
+  {
+    method: "PATCH",
+    path: "/jobs/{id}",
+    handler: patchJobById,
+  },
+  {
+    method: "DELETE",
+    path: "/jobs/{id}",
+    handler: deleteJobById,
   },
 ];
