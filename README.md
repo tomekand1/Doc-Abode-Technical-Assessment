@@ -1,11 +1,12 @@
-# Doc-Abode-Technical-Assessment
+# Technical-Assessment
 
-Considering the time constraints, I made the choice to develop the entire project using pure JavaScript. In retrospect, I realize that TypeScript would have been more suitable for a project of this nature, especially when dealing with multiple payloads and generating requests.
+Considering the time constraints, I made the choice to develop the entire project using pure JavaScript. In retrospect, I realize that TypeScript would have been more suitable for a project of this nature, especially when dealing with multiple payloads validation and generating requests.
 
 </p>
 <em>
 The project employs the MVC (Model-View-Controller) software design pattern. Given additional time, I would have implemented the clean domain pattern in the following manner:
 
+</p>
 <ol>
   <li>Entities (Mongoose models and their abstraction)</li>
   <li>Use Cases (lies outside the Entities layer, contains login and rules related to the behavior and design of the system)</li>
@@ -26,7 +27,7 @@ The project employs the MVC (Model-View-Controller) software design pattern. Giv
 
 ### `Testing`
 
-`Jest`
+Tests are written in `Jest` using mocks rather than in memory-server. (only controller and model are tested as a proof)
 
 <p style="color:grey">
 npm run test:unit:watch OR
